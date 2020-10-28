@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :artists, dependent: :destroy
 
   validates :name, length: { maximum: 35 }
   validates :email, uniqueness: true
