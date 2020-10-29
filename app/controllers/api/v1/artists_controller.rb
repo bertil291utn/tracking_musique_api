@@ -1,7 +1,7 @@
 class Api::V1::ArtistsController < ApplicationController
   before_action :set_artist, only: %i[show update destroy]
   before_action :check_login, only: %i[create]
-  before_action :check_owner, only: %i[update]
+  before_action :check_owner, only: %i[update destroy]
 
   def index
     artists = Artist.all
@@ -27,6 +27,11 @@ class Api::V1::ArtistsController < ApplicationController
     else
       render json: @artist.errors, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @artist.destroy
+    head 204
   end
 
   private

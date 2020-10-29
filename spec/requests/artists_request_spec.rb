@@ -41,4 +41,16 @@ RSpec.describe 'Artists', type: :request do
     before { put "/api/v1/artists/#{artist.id}", params: params_artist, headers: headers }
     it { expect(response).to have_http_status(:forbidden) }
   end
+
+  describe 'should destroy a artist' do
+    before { delete "/api/v1/artists/#{artist.id}", headers: headers }
+    it { expect(response).to have_http_status(:no_content) }
+  end
+
+  describe 'should forbid destroy a artist' do
+    let(:usuario) { create :user }
+    let(:userId) { usuario.id }
+    before { delete "/api/v1/artists/#{artist.id}", headers: headers }
+    it { expect(response).to have_http_status(:forbidden) }
+  end
 end
