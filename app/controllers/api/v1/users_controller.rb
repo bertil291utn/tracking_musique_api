@@ -11,7 +11,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    render json: UserSerializer.new(@user).serializable_hash
+    options = { include: [:artists] }
+    render json: UserSerializer.new(@user, options).serializable_hash
   end
 
   def update
