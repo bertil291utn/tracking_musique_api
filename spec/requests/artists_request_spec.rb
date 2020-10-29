@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Artists', type: :request do
   let(:artist) { create :artist }
+  let(:userId) { artist.user_id }
   let(:params_artist) { { artist: { id_string: artist.id_string } } }
   let(:headers) { { Authorization: JsonWebToken.encode(user_id: userId) } }
 
@@ -19,14 +20,25 @@ RSpec.describe 'Artists', type: :request do
   end
 
   describe 'should create an artist' do
-    let(:userId) { artist.user_id }
     before { post '/api/v1/artists', params: params_artist, headers: headers }
     it { expect(response).to have_http_status(:created) }
   end
 
-  describe 'should not create a review' do
+  describe 'should not create a artist' do
     let(:userId) { 1000 }
     before { post '/api/v1/artists', params: params_artist, headers: headers }
+    it { expect(response).to have_http_status(:forbidden) }
+  end
+
+  describe 'should update artist' do
+    before { put "/api/v1/artists/#{artist.id}", params: params_artist, headers: headers }
+    it { expect(response).to have_http_status(:success) }
+  end
+
+  describe 'should not update artist' do
+    let(:usuario) { create :user }
+    let(:userId) { usuario.id }
+    before { put "/api/v1/artists/#{artist.id}", params: params_artist, headers: headers }
     it { expect(response).to have_http_status(:forbidden) }
   end
 end
