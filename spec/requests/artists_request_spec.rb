@@ -20,7 +20,10 @@ RSpec.describe 'Artists', type: :request do
   end
 
   describe 'should create an artist' do
-    before { post '/api/v1/artists', params: params_artist, headers: headers }
+    before {
+      params_artist[:artist][:id_string] = '003vvx7Niy0yvhvHt4a68B'
+      post '/api/v1/artists', params: params_artist, headers: headers
+    }
     it { expect(response).to have_http_status(:created) }
   end
 
@@ -28,6 +31,14 @@ RSpec.describe 'Artists', type: :request do
     let(:userId) { 1000 }
     before { post '/api/v1/artists', params: params_artist, headers: headers }
     it { expect(response).to have_http_status(:forbidden) }
+
+    context 'violated id_string user_id index' do
+      before {
+        params_artist[:artist][:id_string] = '003vvx7Niy0yvhvHt4a68B'
+        post '/api/v1/artists', params: params_artist, headers: headers
+      }
+      it { expect(response).to have_http_status(:forbidden) }
+    end
   end
 
   describe 'should update artist' do
