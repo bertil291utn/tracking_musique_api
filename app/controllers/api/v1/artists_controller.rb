@@ -5,25 +5,25 @@ class Api::V1::ArtistsController < ApplicationController
 
   def index
     artists = Artist.all
-    render json: artists
+    render json: ArtistSerializer.new(artists).serializable_hash
   end
 
   def create
     artist = current_user.artists.build(artist_params)
     if artist.save
-      render json: artist, status: :created
+      render json: ArtistSerializer.new(artist).serializable_hash, status: :created
     else
       render json: { errors: artist.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: @artist
+    render json: ArtistSerializer.new(@artist).serializable_hash
   end
 
   def update
     if @artist.update(artist_params)
-      render json: @artist
+      render json: ArtistSerializer.new(@artist).serializable_hash
     else
       render json: @artist.errors, status: :unprocessable_entity
     end

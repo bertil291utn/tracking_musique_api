@@ -11,7 +11,7 @@ RSpec.describe 'Artists', type: :request do
     it { expect(response).to have_http_status(:success) }
 
     let(:json_response) { JSON.parse(response.body) }
-    it { expect(json_response['id_string']).to match(artist.id_string) }
+    it { expect(json_response['data']['attributes']['id_string']).to match(artist.id_string) }
   end
 
   describe 'should display artists' do
