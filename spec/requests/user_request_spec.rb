@@ -9,7 +9,7 @@ RSpec.describe 'Users', type: :request do
     it { expect(response).to have_http_status(:success) }
 
     let(:json_response) { JSON.parse(response.body) }
-    it { expect(json_response['email']).to match(usuario.email) }
+    it { expect(json_response['data']['attributes']['email']).to match(usuario.email) }
   end
 
   describe 'create user' do
