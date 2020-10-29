@@ -4,6 +4,7 @@ RSpec.describe Artist, type: :model do
   subject { create :artist }
   describe 'associations' do
     it { should belong_to(:user) }
+    it { should have_many(:stats) }
   end
 
   describe 'validations' do
