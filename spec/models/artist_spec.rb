@@ -5,6 +5,7 @@ RSpec.describe Artist, type: :model do
   describe 'associations' do
     it { should belong_to(:user) }
     it { should have_many(:stats) }
+    it { should have_many(:stats).dependent(:destroy) }
   end
 
   describe 'validations' do
