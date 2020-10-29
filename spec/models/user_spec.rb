@@ -15,7 +15,4 @@ RSpec.describe User, type: :model do
     it { should allow_value('myemail@email.com').for(:email) }
     it { should_not allow_value('myemailemail.com').for(:email) }
   end
-
-  describe 'destroy user destory linked artists' do
-  end
 end
