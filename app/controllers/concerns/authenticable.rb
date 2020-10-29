@@ -13,4 +13,10 @@ module Authenticable
     end
     @current_user
   end
+
+  protected_methods
+
+  def check_login
+    head :forbidden unless current_user
+  end
 end
