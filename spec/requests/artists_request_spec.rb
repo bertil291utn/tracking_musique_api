@@ -10,8 +10,10 @@ RSpec.describe 'Artists', type: :request do
     before { get "/api/v1/artists/#{artist.id}" }
     it { expect(response).to have_http_status(:success) }
 
-    let(:json_response) { JSON.parse(response.body) }
-    it { expect(json_response['data']['attributes']['id_string']).to match(artist.id_string) }
+    let(:json_response) { JSON.parse(response.body, symbolize_names: true) }
+    it { expect(json_response.dig(:data, :attributes, :id_string)).to match(artist.id_string) }
+    it { expect(json_response.dig(:data, :relationships, :user, :data, :id)).to match(artist.user.id.to_s) }
+    it { expect(json_response.dig(:included, 0, :attributes, :email)).to match(artist.user.email) }
   end
 
   describe 'should display artists' do
