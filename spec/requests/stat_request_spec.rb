@@ -24,4 +24,9 @@ RSpec.describe 'Stats', type: :request do
     before { post '/api/v1/stats', params: params_stat, headers: headers }
     it { expect(response).to have_http_status(:created) }
   end
+
+  describe 'should forfid create a stat' do
+    before { post '/api/v1/stats', params: params_stat }
+    it { expect(response).to have_http_status(:forbidden) }
+  end
 end
