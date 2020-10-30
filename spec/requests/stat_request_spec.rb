@@ -11,8 +11,8 @@ RSpec.describe 'Stats', type: :request do
     it { expect(response).to have_http_status(:success) }
 
     let(:json_response) { JSON.parse(response.body) }
-    it { expect(json_response['hours']).to match(stat.hours) }
-    it { expect(json_response['day']).to match(Time.now.utc.strftime('%A').downcase) }
+    it { expect(json_response['data']['attributes']['hours']).to match(stat.hours) }
+    it { expect(json_response['data']['attributes']['day']).to match(Time.now.utc.strftime('%A').downcase) }
   end
 
   describe 'should show stats' do

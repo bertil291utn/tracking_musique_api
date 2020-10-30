@@ -4,20 +4,20 @@ class Api::V1::StatsController < ApplicationController
 
   def index
     stats = Stat.all
-    render json: stats
+    render json: StatSerializer.new(stats).serializable_hash
   end
 
   def create
     stat = current_user.artists.find(stat_params[:artist_id]).stats.build(stat_params)
     if stat.save
-      render json: stat, status: :created
+      render json: StatSerializer.new(stat).serializable_hash, status: :created
     else
       render json: { errors: stat.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: @stat
+    render json: StatSerializer.new(@stat).serializable_hash
   end
 
   private
