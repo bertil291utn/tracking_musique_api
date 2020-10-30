@@ -17,7 +17,6 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def show
-    options = { include: [:artist] }
     render json: StatSerializer.new(@stat).serializable_hash
   end
 

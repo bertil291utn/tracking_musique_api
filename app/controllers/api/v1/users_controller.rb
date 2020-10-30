@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  before_action :set_user, only: %i[show update destroy user_artists]
 
   def create
     @user = User.new(user_params)
@@ -11,6 +11,10 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
+    render json: UserSerializer.new(@user).serializable_hash
+  end
+
+  def user_artists
     options = { include: [:artists] }
     render json: UserSerializer.new(@user, options).serializable_hash
   end
