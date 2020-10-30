@@ -3,7 +3,16 @@ require 'rails_helper'
 RSpec.describe 'Stats', type: :request do
   let(:stat) { create :stat }
   let(:userId) { stat.artist.user_id }
-  let(:params_stat) { { stat: { hours: stat.hours, track_name: stat.track_name, artist_id: stat.artist.id } } }
+  let(:params_stat) {
+    {
+      stat: {
+        hours: stat.hours,
+        track_name: stat.track_name,
+        artist_id: stat.artist.id,
+        spotify_track_id: stat.spotify_track_id,
+      },
+    }
+  }
   let(:headers) { { Authorization: JsonWebToken.encode(user_id: userId) } }
 
   describe 'should show a stat' do
@@ -12,6 +21,8 @@ RSpec.describe 'Stats', type: :request do
 
     let(:json_response) { JSON.parse(response.body, symbolize_names: true) }
     it { expect(json_response.dig(:data, :attributes, :hours)).to match(stat.hours) }
+    it { expect(json_response.dig(:data, :attributes, :track_name)).to match(stat.track_name) }
+    it { expect(json_response.dig(:data, :attributes, :spotify_track_id)).to match(stat.spotify_track_id) }
     it { expect(json_response.dig(:data, :attributes, :day)).to match(Time.now.utc.strftime('%A').downcase) }
   end
 

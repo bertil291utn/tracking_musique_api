@@ -27,6 +27,6 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def stat_params
-    params.require(:stat).permit(:hours, :track_name, :artist_id)
+    params.require(:stat).permit(:hours, :track_name, :artist_id, :spotify_track_id)
   end
 end

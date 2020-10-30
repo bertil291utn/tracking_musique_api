@@ -1,4 +1,4 @@
 class StatSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :hours, :day, :created_at
+  attributes :hours, :day, :track_name, :spotify_track_id, :created_at
 end
