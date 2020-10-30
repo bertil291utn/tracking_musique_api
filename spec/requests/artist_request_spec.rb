@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Artists', type: :request do
-  let(:artist) { create :artist }
+  let(:stat) { create :stat }
+  let(:artist) { stat.artist }
+
   let(:userId) { artist.user_id }
   let(:params_artist) { { artist: { id_string: artist.id_string } } }
   let(:headers) { { Authorization: JsonWebToken.encode(user_id: userId) } }
@@ -12,8 +14,8 @@ RSpec.describe 'Artists', type: :request do
 
     let(:json_response) { JSON.parse(response.body, symbolize_names: true) }
     it { expect(json_response.dig(:data, :attributes, :id_string)).to match(artist.id_string) }
-    it { expect(json_response.dig(:data, :relationships, :user, :data, :id)).to match(artist.user.id.to_s) }
-    it { expect(json_response.dig(:included, 0, :attributes, :email)).to match(artist.user.email) }
+    it { expect(json_response.dig(:data, :relationships, :stats, :data, 0, :id)).to match(artist.stats.first.id.to_s) }
+    it { expect(json_response.dig(:included, 0, :attributes, :hours)).to match(artist.stats.first.hours) }
   end
 
   describe 'should display artists' do
