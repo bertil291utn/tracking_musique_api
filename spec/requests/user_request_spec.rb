@@ -7,7 +7,7 @@ RSpec.describe 'Users', type: :request do
   describe 'should show user' do
     let(:artist) { create :artist }
     let(:usuario) { artist.user }
-    before { get "/api/v1/users/#{usuario.id}" }
+    before { get "/api/v1/user_artists/#{usuario.id}" }
     it { expect(response).to have_http_status(:success) }
 
     let(:json_response) { JSON.parse(response.body, symbolize_names: true) }

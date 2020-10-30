@@ -13,8 +13,6 @@ RSpec.describe 'Stats', type: :request do
     let(:json_response) { JSON.parse(response.body, symbolize_names: true) }
     it { expect(json_response.dig(:data, :attributes, :hours)).to match(stat.hours) }
     it { expect(json_response.dig(:data, :attributes, :day)).to match(Time.now.utc.strftime('%A').downcase) }
-    it { expect(json_response.dig(:data, :relationships, :artist, :data, :id)).to match(stat.artist.id.to_s) }
-    it { expect(json_response.dig(:included, 0, :attributes, :id_string)).to match(stat.artist.id_string) }
   end
 
   describe 'should show stats' do
