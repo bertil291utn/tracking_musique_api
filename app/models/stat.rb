@@ -6,6 +6,6 @@ class Stat < ApplicationRecord
   validates_numericality_of :hours, greater_than: 0
 
   def dayify
-    self.day = created_at.strftime('%A').downcase
+    self.day = Time.now.utc.strftime('%A').downcase
   end
 end
