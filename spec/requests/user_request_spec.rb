@@ -5,19 +5,15 @@ RSpec.describe 'Users', type: :request do
   let(:params_user) { { user: { name: usuario.name, email: usuario.email, password: usuario.password_digest } } }
 
   describe 'should show user' do
+    let(:artist) { create :artist }
+    let(:usuario) { artist.user }
     before { get "/api/v1/users/#{usuario.id}" }
     it { expect(response).to have_http_status(:success) }
 
     let(:json_response) { JSON.parse(response.body, symbolize_names: true) }
     it { expect(json_response.dig(:data, :attributes, :email)).to match(usuario.email) }
-
-    context 'a context' do
-      let(:artist) { create :artist }
-      before { get "/api/v1/users/#{artist.user_id}" }
-
-      it { expect(json_response.dig(:data, :relationships, :artists, :data, 0, :id)).to match(artist.id.to_s) }
-      it { expect(json_response.dig(:included, 0, :attributes, :id_string)).to match(artist.id_string) }
-    end
+    it { expect(json_response.dig(:data, :relationships, :artists, :data, 0, :id)).to match(usuario.artists.first.id.to_s) }
+    it { expect(json_response.dig(:included, 0, :attributes, :id_string)).to match(usuario.artists.first.id_string) }
   end
 
   describe 'create user' do
