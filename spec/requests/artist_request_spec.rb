@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Artists', type: :request do
-  let(:stat) { create :stat }
-  let(:artist) { stat.artist }
-
+  let(:artist) { create :artist }
   let(:userId) { artist.user_id }
   let(:params_artist) { { artist: { id_string: artist.id_string } } }
   let(:headers) { { Authorization: JsonWebToken.encode(user_id: userId) } }
 
   describe 'should show an artist' do
+    let(:stat) { create :stat }
+    let(:artist) { stat.artist }
     before { get "/api/v1/artists/#{artist.id}" }
     it { expect(response).to have_http_status(:success) }
 
