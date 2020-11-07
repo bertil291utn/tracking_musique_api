@@ -15,7 +15,7 @@ class Api::V1::TokensController < ApplicationController
     if current_user
       render json: {
         message: 'Valid token',
-        status: 201,
+        status: 200,
       }
     else
       head :unauthorized
