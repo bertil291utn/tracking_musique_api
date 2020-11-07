@@ -10,8 +10,8 @@ require 'faker'
 Stat.delete_all
 Artist.delete_all
 User.delete_all
-ids_artists = %w[0oSGxfWSnnOXhD2fKuz2Gy 3dBVyJ7JuOMt4GE9607Qin 1sTsuZTdANkiFd7T34H3nb 4M2gGLzKCo0rPyn224PsoN]
-ids_tracks = %w[6wVWJl64yoTzU27EI8ep20 0LoQuiekvzqx7n8flgEKzF 5gOnivVq0hLxPvIPC00ZhF 1y5LL9dpLXbCXNKKqw5wCJ]
+ids_artists = %w[60d24wfXkVzDSfLS6hyCjZ 6M2wZ9GZgrQXHCFfjv46we 1Xyo4u8uXC1ZmMpatF05PJ 7CajNmpbOovFoOoasH2HaY]
+ids_tracks = %w[5Dqik1P9toCJTLj5rEm78s 5LYJ631w9ps5h9tdvac7yP 2Ch7LmS7r2Gy2kc64wv3Bz 0NdTUS4UiNYCNn5FgVqKQY]
 
 5.times do
   name = Faker::Name.name

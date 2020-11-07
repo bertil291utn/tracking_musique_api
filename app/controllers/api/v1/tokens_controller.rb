@@ -4,7 +4,7 @@ class Api::V1::TokensController < ApplicationController
     if @user&.authenticate(user_params[:password])
       render json: {
         token: JsonWebToken.encode(user_id: @user.id),
-        email: @user.email,
+        userid: @user.id,
       }
     else
       render json: { message: 'Invalid credentials' }, status: :unauthorized
@@ -13,7 +13,7 @@ class Api::V1::TokensController < ApplicationController
 
   def valid_token
     if current_user
-      render json: { message: 'Valid token' }
+      render json: { message: 'Valid token', userId: current_user.id }
     else
       render json: { message: 'Unauthorized token' }, status: :unauthorized
     end
