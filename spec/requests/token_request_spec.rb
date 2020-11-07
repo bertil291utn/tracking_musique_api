@@ -24,5 +24,7 @@ RSpec.describe 'Tokens', type: :request do
     let(:headers) { { Authorization: JsonWebToken.encode(user_id: -1) } }
     before { post '/api/v1/valid_token', headers: headers }
     it { expect(response).to have_http_status(:unauthorized) }
+    let(:json_response) { JSON.parse(response.body) }
+    it { expect(json_response['message']).to eql('Unauthorized token') }
   end
 end
