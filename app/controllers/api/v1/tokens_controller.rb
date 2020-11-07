@@ -7,7 +7,7 @@ class Api::V1::TokensController < ApplicationController
         email: @user.email,
       }
     else
-      head :unauthorized
+      render json: { message: 'Invalid credentials' }, status: :unauthorized
     end
   end
 
