@@ -11,4 +11,18 @@ RSpec.describe 'Tokens', type: :request do
     before { post '/api/v1/tokens', params: { user: { email: user.email, password: 'bad_pa$$' } } }
     it { expect(response).to have_http_status(:unauthorized) }
   end
+
+  describe 'should return a successfull status' do
+    let(:headers) { { Authorization: JsonWebToken.encode(user_id: user.id) } }
+    before { post '/api/v1/valid_token', headers: headers }
+    it { expect(response).to have_http_status(:success) }
+    let(:json_response) { JSON.parse(response.body) }
+    it { expect(json_response['message']).to eql('Valid token') }
+  end
+
+  describe 'should return a forbidden status' do
+    let(:headers) { { Authorization: JsonWebToken.encode(user_id: -1) } }
+    before { post '/api/v1/valid_token', headers: headers }
+    it { expect(response).to have_http_status(:unauthorized) }
+  end
 end

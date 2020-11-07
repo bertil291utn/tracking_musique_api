@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users, only: %i[show create update destroy]
       get 'user_artists/:id', to: 'users#user_artists'
       resources :tokens, only: [:create]
+      post 'valid_token', to: 'tokens#valid_token'
       resources :artists
       resources :stats
     end

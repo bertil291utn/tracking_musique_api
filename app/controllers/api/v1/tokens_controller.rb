@@ -11,6 +11,17 @@ class Api::V1::TokensController < ApplicationController
     end
   end
 
+  def valid_token
+    if current_user
+      render json: {
+        message: 'Valid token',
+        status: 201,
+      }
+    else
+      head :unauthorized
+    end
+  end
+
   private
 
   def user_params
