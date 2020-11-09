@@ -8,7 +8,7 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def create
-    stat = current_user.artists.find(stat_params[:artist_id]).stats.build(stat_params)
+    stat = current_user.artists.find_by_id_string(params[:id_string]).stats.build(stat_params)
     if stat.save
       render json: StatSerializer.new(stat).serializable_hash, status: :created
     else
