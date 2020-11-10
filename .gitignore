@@ -34,3 +34,4 @@
 
 .stylelintrc.json
 .rubocop.yml
+*.pdf
