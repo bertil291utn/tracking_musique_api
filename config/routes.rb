@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       post 'valid_token', to: 'tokens#valid_token'
       resources :artists
       resources :stats
+      get 'user_artist_stats', to: 'artists#user_artist_stats'
     end
   end
 end

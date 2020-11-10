@@ -1,6 +1,6 @@
 class Api::V1::ArtistsController < ApplicationController
   before_action :set_artist, only: %i[show update destroy]
-  before_action :check_login, only: %i[create]
+  before_action :check_login, only: %i[create user_artist_stats]
   before_action :check_owner, only: %i[update destroy]
 
   def index
@@ -20,6 +20,12 @@ class Api::V1::ArtistsController < ApplicationController
   def show
     options = { include: [:stats] }
     render json: ArtistSerializer.new(@artist, options).serializable_hash
+  end
+
+  def user_artist_stats
+    artists = current_user.artists
+    options = { include: [:stats] }
+    render json: ArtistSerializer.new(artists, options).serializable_hash
   end
 
   def update
