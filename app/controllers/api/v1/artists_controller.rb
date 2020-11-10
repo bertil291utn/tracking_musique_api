@@ -48,7 +48,7 @@ class Api::V1::ArtistsController < ApplicationController
   end
 
   def artist_params
-    params.require(:artist).permit(:id_string)
+    params.require(:artist).permit(:id_string, :name, :photoUrl)
   end
 
   def check_owner
