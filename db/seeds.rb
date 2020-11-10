@@ -32,7 +32,6 @@ artists = [
     "photoUrl": 'https://i.scdn.co/image/86c5f96479cd660cce7f8c8c84187242e02dba34',
   },
 ]
-p artists[0][:id]
 ids_tracks = %w[5Dqik1P9toCJTLj5rEm78s 5LYJ631w9ps5h9tdvac7yP 2Ch7LmS7r2Gy2kc64wv3Bz 0NdTUS4UiNYCNn5FgVqKQY]
 
 3.times do
@@ -47,7 +46,7 @@ ids_tracks = %w[5Dqik1P9toCJTLj5rEm78s 5LYJ631w9ps5h9tdvac7yP 2Ch7LmS7r2Gy2kc64w
       user_id: user[:id],
     )
     rand(1..2).times do
-      Stat.create! hours: rand(1..10), track_name: Faker::Music::Phish.song, spotify_track_id: ids_tracks.sample, artist_id: artist.id
+      Stat.create! hours: rand(1..10) * 1000, track_name: Faker::Music::Phish.song, spotify_track_id: ids_tracks.sample, artist_id: artist.id
     end
   end
 end
