@@ -1,6 +1,6 @@
 # Spotify stats API
 
-### This is the backe for spotify stats musique tracking app. A web app will let you know your monthly stats about your artists tracks.
+### This is the backend for spotify stats musique tracking app. A web app will let you know your monthly stats about your artists tracks.
 
 *Go check it out the front end [repository]() where you'll find the live demo app*
 
