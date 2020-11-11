@@ -1,3 +1,4 @@
+# rubocop:disable Layout/LineLength
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
@@ -32,10 +33,10 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'should not update user, invalid email' do
-    before {
+    before do
       params_user[:user][:email] = 'bad email'
       put "/api/v1/users/#{usuario.id}", params: params_user
-    }
+    end
     it { expect(response).to have_http_status(:unprocessable_entity) }
   end
 
@@ -44,3 +45,4 @@ RSpec.describe 'Users', type: :request do
     it { expect(response).to have_http_status(:no_content) }
   end
 end
+# rubocop:enable Layout/LineLength

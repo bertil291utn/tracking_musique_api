@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe 'Stats', type: :request do
   let(:stat) { create :stat }
   let(:userId) { stat.artist.user_id }
-  let(:params_stat) {
+  let(:params_stat) do
     {
       stat: {
         hours: stat.hours,
         track_name: stat.track_name,
         artist_id: stat.artist.id,
-        spotify_track_id: stat.spotify_track_id,
-      },
+        spotify_track_id: stat.spotify_track_id
+      }
     }
-  }
+  end
   let(:headers) { { Authorization: JsonWebToken.encode(user_id: userId) } }
 
   describe 'should show a stat' do
