@@ -8,7 +8,7 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def create
-    stat = current_user.artist_stats(params[:id_string]).build(stat_params)
+    stat = current_user.artist_stats(stat_params[:artist_id]).build(stat_params)
     if stat.save
       render json: StatSerializer.new(stat).serializable_hash, status: :created
     else
@@ -27,6 +27,6 @@ class Api::V1::StatsController < ApplicationController
   end
 
   def stat_params
-    params.require(:stat).permit(:hours, :track_name, :spotify_track_id)
+    params.require(:stat).permit(:hours, :track_name, :spotify_track_id,:artist_id)
   end
 end

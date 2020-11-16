@@ -6,7 +6,7 @@ class Artist < ApplicationRecord
   validates_format_of :id_string, with: /[A-Za-z0-9]+/
   validates :id_string, uniqueness: { scope: :user_id }
 
-  def self.stats(id_string)
-    find_by_id_string(id_string).stats
+  def self.stats(id_artist)
+    find(id_artist).stats
   end
 end

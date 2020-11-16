@@ -7,7 +7,7 @@ class User < ApplicationRecord
   validates_format_of :email, with: /@/
   validates_presence_of :name, :email, :password_digest
 
-  def artist_stats(id_string)
-    artists.stats(id_string)
+  def artist_stats(id_artists)
+    artists.stats(id_artists)
   end
 end
